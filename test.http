@@ -2,18 +2,31 @@
 # Content-Type: application/json
 
 # {
-#     "username": "newUsr",
+#     "username": "username",
 #     "password" : "12345678"
-    
 # }
-POST http://localhost:3000/auth/signup HTTP/1.1
+
+PUT http://localhost:3000/auth/6151f6dca5585ff7e8e9445f HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTFmNmRjYTU1ODVmZjdlOGU5NDQ1ZiIsImlhdCI6MTYzMjc4MjYyMywiZXhwIjoxNjMyODY5MDIzfQ.leqBRHIoTs5qlqLicAMVARMGp39XRXDtlOKm3zC9O9s
 Content-Type: application/json
 
 {
-    "username": "newUsr3",
-    "email" : "newUsr3@gmail.com",
-    "password" : "12345678"
+    "username": "newUserjkladsf",
+    "firstname": "firstasdfjqwe",
+    "lastname" : "lastasdfwef",
+    "email": "eewafe@asfdji"
 }
+
+# POST http://localhost:3000/auth/signup HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "username": "username",
+#     "email" : "username@gmail.com",
+#     "password" : "12345678",
+#     "firstname": "firstname",
+#     "lastname":"lastname"
+# }
 
 # GET http://localhost:3000/auth/admin HTTP/1.1
 # x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNGMyZmI3Mzk1ZWQ2YWMzMmI2MzM4ZCIsImlhdCI6MTYzMjM4Mjk1MSwiZXhwIjoxNjMyNDY5MzUxfQ.Bz3DfEr4tvTCWJLN7dYRG1DpRhbzxn0k8MP1B_hPskQ 

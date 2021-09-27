@@ -11,6 +11,8 @@ exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     password: bcrypt.hashSync(req.body.password, 8),
   });
   user.save((err, user) => {
@@ -95,7 +97,73 @@ exports.login = (req, res) => {
         username: user.username,
         email: user.email,
         roles: roles,
+        firstname: user.firstname,
+        lastname: user.lastname,
         accessToken: token,
       });
     });
+};
+
+// get one user
+exports.getUser = (req, res) => {
+  User.findById(req.params.id)
+    .populate("roles", "-__V")
+    .exec((err, user) => {
+      if (err) {
+        return res.status(500).send({
+          msg: err,
+        });
+      }
+      if (!user) {
+        return res.status(404).send({
+          msg: "User not found",
+        });
+      }
+      console.log(user);
+      var roles = [];
+      for (let i = 0; i < user.roles.length; i++) {
+        roles.push("ROLE_" + user.roles[i].name.toUpperCase());
+      }
+      res.status(200).send({
+        username: user.username,
+        email: user.email,
+        roles: roles,
+        firstname: user.firstname,
+        lastname: user.lastname,
+      });
+    });
+};
+
+exports.updateUser = (req, res) => {
+  console.log("update user entered");
+  User.findById(req.params.id).exec((err, user) => {
+    if (err) {
+      return res.status(500).send({
+        msg: err,
+      });
+    }
+    if (!user) {
+      return res.status(404).send({
+        msg: "User not found",
+      });
+    }
+    console.log(req.body);
+    user.username = req.body.username;
+    user.firstname = req.body.firstname;
+    user.lastname = req.body.lastname;
+    user.email = req.body.email;
+    user.save((err) => {
+      if (err) {
+        return res.status(500).send({
+          msg: err,
+        });
+      }
+      res.status(200).send({
+        username: user.username,
+        email: user.email,
+        firstname: user.firstname,
+        lastname: user.lastname,
+      });
+    });
+  });
 };

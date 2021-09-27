@@ -28,6 +28,12 @@ router.post(
 // route for login
 router.post("/login", auth_controller.login);
 
+// route for getting one user
+router.get("/:id", [authJwt.verifyToken], auth_controller.getUser);
+
+// route for updating user profile
+router.put("/:id", [authJwt.verifyToken], auth_controller.updateUser);
+
 // authorization checkers
 router.get("/all", user_controller.allAccess);
 
